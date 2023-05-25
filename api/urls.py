@@ -1,13 +1,13 @@
 from django.urls import path
-from api.views import ClientCreateView,ClientDetailView,ProjectCreateView,ClientProjectsDetailView,ProjectListView,UserListView
+from .views import *
 
+urlpatterns=[
+    path('create_client/',ClientCreateView.as_view(),name='create_client'),
+    path('client_detail/', ClientInfoView.as_view(),name='client_detail'),
+    path('update_client/<int:pk>/', UpdateClientView.as_view(),name='update_client'),
+    path('delete_client/<int:id>/', DeleteClientView.as_view(),name='delete_client'),
 
-urlpatterns = [
-    path('api/clients/', ClientCreateView.as_view(), name='client-list-create'),
-    path('api/clients/<int:pk>/', ClientDetailView.as_view(), name='client-detail'),
-    path('api/clients/<int:client_id>/projects/', ProjectCreateView.as_view(), name='project-create'),
-    path('api/projects/', ProjectListView.as_view(), name='project-list'),
-    path('api/clients/<int:pk>/projects/', ClientProjectsDetailView.as_view(), name='client-projects-detail'),
-    path('api/users/', UserListView.as_view(), name='user-list'),
-    
-  ] 
+    path('project_create/',ProjectCreateView.as_view(),name='project_create'),
+    path('project_list/',AllRecordsFromProjects.as_view(),name='project_list'),
+    path('project_detail/',ProjectDetailView.as_view(),name='project_detail'),
+]
